@@ -22,7 +22,7 @@ func (j *Justify) Run() {
 
 		transformed := j.NormalTransform(splitted, font)
 
-		j.PrintAscii(transformed)
+		j.PrintAscii(transformed, 0)
 	} else {
 		_, width, err := j.GetTerminalSize()
 		if err != nil {
@@ -36,8 +36,10 @@ func (j *Justify) Run() {
 
 		transformed := j.TransformAndJustify(splitted, font)
 
-		j.PrintAscii(transformed)
+		j.PrintAscii(transformed, 0)
 	}
+
+	fmt.Println("spaces: ",j.calcAmountOfSpace(166, [][]string{{"Abeg"}, {"drop"}, {"am"}}))
 }
 
 func (j *Justify) PrintError(err string) {

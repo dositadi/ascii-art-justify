@@ -1,17 +1,7 @@
 package asciijustify
 
-import (
-	"fmt"
-)
-
 func (j *Justify) TransformAndJustify(input []string, font string) [][][]string {
 	var output [][][]string
-
-	/* slice := [][]string{{"abc"}, {"b"}, {"c"}, {"d"}}
-
-	slice[2] = slices.Repeat(slice[2], 3)
-
-	fmt.Println(slice) */
 
 	for _, word := range input {
 		var chars [][]string
@@ -22,10 +12,14 @@ func (j *Justify) TransformAndJustify(input []string, font string) [][][]string 
 			continue
 		}
 
-		fmt.Println(len(word))
-
 		for _, char := range word {
 			if char < ' ' || char > '~' {
+				continue
+			}
+
+			if char == ' '{
+				space := []string{" "}
+				chars = append(chars, space)
 				continue
 			}
 
@@ -37,7 +31,6 @@ func (j *Justify) TransformAndJustify(input []string, font string) [][][]string 
 			chars = append(chars, ascii)
 		}
 
-		fmt.Println(len(chars), len(word))
 		output = append(output, chars)
 	}
 

@@ -36,10 +36,10 @@ func (j *Justify) Run() {
 
 		transformed := j.TransformAndJustify(splitted, font)
 
-		j.PrintAscii(transformed, 0)
+		j.PrintAscii(transformed, width)
 	}
 
-	fmt.Println("spaces: ",j.calcAmountOfSpace(166, [][]string{{"Abeg"}, {"drop"}, {"am"}}))
+	fmt.Println("spaces: ", j.calcAmountOfSpace(166, [][]string{{"Abeg", "go", "school", "there"}, {"drop"}, {"am"}}))
 }
 
 func (j *Justify) PrintError(err string) {

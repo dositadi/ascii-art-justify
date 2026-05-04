@@ -19,7 +19,11 @@ func (j *Justify) Run() {
 		return
 	}
 
-	_, _, _ = j.GetUserInput()
+	/* alignment, text, font := j.GetUserInput()
+
+	fmt.Println(alignment, text, font) */
+
+	fmt.Println(j.GetSpacesIndex("Hello world"))
 }
 
 func (j *Justify) PrintError(err string) {

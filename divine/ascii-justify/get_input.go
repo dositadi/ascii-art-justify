@@ -20,7 +20,7 @@ func (j *Justify) GetUserInput() (string, string, string) {
 
 	alignValue := strings.TrimPrefix(args[0], AlignFlag)
 
-	if !((alignValue == "right") || (alignValue == "left") || (alignValue == "center") || (alignValue == "justify")) {
+	if !(alignValue == "right" || alignValue == "left" || alignValue == "center" || alignValue == "justify") {
 		j.PrintError(UsageErr)
 		return "", "", ""
 	}

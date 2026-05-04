@@ -2,6 +2,7 @@ package asciijustify
 
 import (
 	"fmt"
+	"strings"
 )
 
 const (
@@ -13,17 +14,30 @@ const (
 type Justify struct{}
 
 func (j *Justify) Run() {
-	_, _, err := j.GetTerminalSize()
-	if err != nil {
-		j.PrintError(TerminalSizeError + " " + err.Error())
-		return
+
+	_, text, font := j.GetUserInput()
+
+	if !strings.Contains(text, " ") {
+		splitted := j.SplitByNewLine(text)
+
+		transformed := j.NormalTransform(splitted, font)
+
+		j.PrintAscii(transformed)
+	} else {
+		_, width, err := j.GetTerminalSize()
+		if err != nil {
+			j.PrintError(TerminalSizeError + " " + err.Error())
+			return
+		}
+
+		fmt.Println(width)
+
+		splitted := j.SplitByNewLine(text)
+
+		transformed := j.TransformAndJustify(splitted, font)
+
+		j.PrintAscii(transformed)
 	}
-
-	/* alignment, text, font := j.GetUserInput()
-
-	fmt.Println(alignment, text, font) */
-
-	fmt.Println(j.GetSpacesIndex("Hello world"))
 }
 
 func (j *Justify) PrintError(err string) {

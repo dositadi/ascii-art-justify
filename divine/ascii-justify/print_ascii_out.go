@@ -9,8 +9,6 @@ import (
 func (j *Justify) PrintAscii(input [][][]string, width int) {
 	var asciiArt strings.Builder
 
-	fmt.Println("input length: ", len(input))
-
 	for _, words := range input {
 
 		if slices.Compare(words[0], []string{""}) == 0 {
@@ -19,7 +17,6 @@ func (j *Justify) PrintAscii(input [][][]string, width int) {
 		}
 
 		spaces := j.calcAmountOfSpace(width, words)
-		fmt.Println("Spaces: ", spaces)
 
 		for i := 0; i < 8; i++ {
 
@@ -46,19 +43,13 @@ func (j *Justify) calcAmountOfSpace(terminalWidth int, words [][]string) int {
 		}
 	}
 
-	fmt.Println("TG: ", totalGaps)
-
 	totalWordChars := 0
 
 	for _, word := range words {
 		totalWordChars += len(slices.Max(word))
-		fmt.Println("maximal word: ", slices.Max(word))
 	}
 
-	fmt.Println("TW: ", totalWordChars)
-
 	availableSpace := terminalWidth - totalWordChars
-	fmt.Println("AS: ", availableSpace)
 
 	if availableSpace < 0 {
 		return 4
